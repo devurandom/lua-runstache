@@ -13,13 +13,10 @@ local function runstache(args)
 	local preprocess = args.preprocess
 
 	if preprocess then
-		context = preprocess(context)
+		context = assert(preprocess(context))
 	end
 
-	local template_file = args.template
-	local template = template_file:read("*a")
-	template_file:close()
-
+	local template = assert(slurp(args.template))
 	local partials = setmetatable({}, {__index = function(table, key) return slurp(key) end})
 	local text = assert(stache:render(template, context, partials))
 
