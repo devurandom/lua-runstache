@@ -1,0 +1,8 @@
+example:
+  value: 1
+  additional: much more
+  template: |
+    Template
+    With
+    much more
+    Value

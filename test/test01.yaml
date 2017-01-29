@@ -1,0 +1,5 @@
+example:
+  value: {{example.value}}
+  additional: {{additional}}
+  template: |
+    {{>test01.template}}

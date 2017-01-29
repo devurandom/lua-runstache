@@ -1,0 +1,3 @@
+some-service:
+  hostfile: {{hostname}}.cfg
+  ip: {{ip}}

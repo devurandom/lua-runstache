@@ -1,0 +1,3 @@
+some-service:
+  hostfile: orange.cfg
+  ip: 10.0.0.1
