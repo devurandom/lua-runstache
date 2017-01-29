@@ -6,6 +6,7 @@ local argparse = require "argparse"
 local insert = require "std.table".insert
 local remove = require "std.table".remove
 local slurp = require "std.io".slurp
+local splitdir = require "std.io".splitdir
 
 local function runstache(args)
 	local context = args.context
@@ -46,14 +47,23 @@ local function safe_dofile(filename)
 	return results
 end
 
-local script_filename = arg[0]
+function basename(filename)
+	local parts = splitdir(filename)
+	return parts[#parts]
+end
+
+local script_filename = basename(arg[0])
+local config_filename = script_filename:gsub(".lua$", ".cfg")
+if not config_filename:match(".cfg$") then
+  config_filename = config_filename .. ".cfg"
+end
 
 local parser = argparse()
 	:description("Parse file as a template, reading template parameters from another file")
 parser:argument "config"
 	:description("Configuration file")
 	:args(1)
-	:default(script_filename:gsub(".lua$", ".cfg"))
+	:default(config_filename)
 	:convert(safe_dofile)
 parser:argument "template"
 	:description("Template file")
