@@ -25,14 +25,16 @@ local function runstache(args)
 	output_file:close()
 end
 
-local function open_string(filename)
-	if filename == "STDIN" then
-		return io.stdin
-	elseif filename == "STDOUT" then
-		return io.stdout
-	end
+local function open_string(mode)
+	return function (filename)
+		if filename == "STDIN" then
+			return io.stdin
+		elseif filename == "STDOUT" then
+			return io.stdout
+		end
 
-	return io.open(filename)
+		return io.open(filename, mode)
+	end
 end
 
 local function safe_dofile(filename)
@@ -66,12 +68,12 @@ parser:argument "template"
 	:description("Template file")
 	:args(1)
 	:default("STDIN")
-	:convert(open_string)
+	:convert(open_string("r"))
 parser:argument "output"
 	:description("Output file")
 	:args(1)
 	:default("STDOUT")
-	:convert(open_string)
+	:convert(open_string("w"))
 parser:option "-e" "--env"
 	:description("Additional context")
 	:argname("<key[=value]>")
