@@ -80,12 +80,14 @@ parser:option "-e" "--env"
 local args = parser:parse()
 
 local context = args.config[1]
-for _,e in ipairs(args.env) do
-	local k, v = e:match("^([^=]*)=([^=]*)$")
-	if k and v then
-		context[k] = v
-	else
-		insert(context, e)
+if args.env then
+	for _,e in ipairs(args.env) do
+		local k, v = e:match("^([^=]*)=([^=]*)$")
+		if k and v then
+			context[k] = v
+		else
+			insert(context, e)
+		end
 	end
 end
 args.context = context
