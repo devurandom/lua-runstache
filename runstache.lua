@@ -52,7 +52,7 @@ end
 local script_filename = basename(arg[0])
 local config_filename = script_filename:gsub(".lua$", ".cfg")
 if not config_filename:match(".cfg$") then
-  config_filename = config_filename .. ".cfg"
+	config_filename = config_filename .. ".cfg"
 end
 
 local parser = argparse()
