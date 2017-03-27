@@ -1,8 +1,8 @@
 package = "runstache"
-version = "0.0.2-1"
+version = "0.0.2-2"
 source = {
-  url = "https://github.com/urzds/lua-runstache/archive/v0.0.2-1.tar.gz",
-  dir = "lua-runstache-0.0.2-1"
+  url = "https://github.com/urzds/lua-runstache/archive/v0.0.2-2.tar.gz",
+  dir = "lua-runstache-0.0.2-2"
 }
 description = {
   summary = "Standalone {{mustache}} rendering with Lua",
