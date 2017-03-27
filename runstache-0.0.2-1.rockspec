@@ -14,7 +14,9 @@ description = {
   license = "MIT <http://opensource.org/licenses/MIT>"
 }
 dependencies = {
-  "lustache >= 1.3"
+  "argparse >= 0.5",
+  "lustache >= 1.3",
+  "stdlib >= 41",
 }
 build = {
   type = "none",
