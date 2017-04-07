@@ -90,4 +90,4 @@ if args.env then
 end
 args.context = context
 
-runstache(args)
+return runstache(args)
