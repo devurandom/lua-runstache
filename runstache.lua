@@ -1,5 +1,7 @@
 #!/usr/bin/lua
 
+local unpack = require "table".unpack
+
 local stache = require "lustache"
 local argparse = require "argparse"
 
@@ -41,9 +43,9 @@ local function safe_dofile(filename)
 	local results = {pcall(dofile, filename)}
 	local success = remove(results, 1)
 	if not success then
-		return nil, results[1]
+		return nil, unpack(results)
 	end
-	return results
+	return unpack(results)
 end
 
 function basename(filename)
