@@ -12,12 +12,6 @@ local splitdir = require "std.io".splitdir
 
 local function runstache(args)
 	local context = args.context
-	local preprocess = args.preprocess
-
-	if preprocess then
-		context = assert(preprocess(context))
-	end
-
 	local template = assert(slurp(args.template))
 	local partials = setmetatable({}, {__index = function(table, key) return slurp(key) end})
 	local text = assert(stache:render(template, context, partials))
@@ -95,6 +89,5 @@ if args.env then
 	end
 end
 args.context = context
-args.preprocess = args.config[2]
 
 runstache(args)
