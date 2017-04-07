@@ -11,7 +11,7 @@ local slurp = require "std.io".slurp
 local splitdir = require "std.io".splitdir
 
 local function runstache(args)
-	local context = args.context
+	local context = args.config
 	local template = assert(slurp(args.template))
 	local partials = setmetatable({}, {__index = function(table, key) return slurp(key) end})
 	local text = assert(stache:render(template, context, partials))
@@ -70,24 +70,6 @@ parser:argument "output"
 	:args(1)
 	:default("STDOUT")
 	:convert(open_string("w"))
-parser:option "-e" "--env"
-	:description("Additional context")
-	:argname("<key[=value]>")
-	:args("*")
 
 local args = parser:parse()
-
-local context = args.config[1]
-if args.env then
-	for _,e in ipairs(args.env) do
-		local k, v = e:match("^([^=]*)=([^=]*)$")
-		if k and v then
-			context[k] = v
-		else
-			insert(context, e)
-		end
-	end
-end
-args.context = context
-
 return runstache(args)
